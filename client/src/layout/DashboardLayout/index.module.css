@@ -1,0 +1,122 @@
+/* Layout container */
+.container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-top: 70px; /* leaves space for navbar */
+}
+
+/* Flex layout */
+.homeContainer {
+  display: flex;
+  width: 100%;
+  max-width: 1200px;
+  gap: 20px;
+  padding: 15px;
+}
+
+/* Sidebar */
+.leftBar {
+  flex: 0.2;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  background: #fafafa;
+  border-right: 1px solid #eee;
+  padding: 20px 10px;
+  border-radius: 12px;
+  height: fit-content;
+  transition: all 0.3s ease;
+}
+
+/* Sidebar options */
+.sideBarOption {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 15px;
+  cursor: pointer;
+  font-size: 16px;
+  color: #444;
+  border-radius: 8px;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+}
+
+.sideBarOption:hover {
+  background: #f0f0f0;
+  color: #000;
+  transform: scale3d(1.02, 1.01, 1);
+}
+
+/* Sidebar icon */
+.icon {
+  height: 24px;
+  width: 24px;
+  color: #555;
+}
+
+/* Feed (main content) */
+.feedContainer {
+  flex: 0.6;
+  min-height: 400px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
+}
+
+/* Extra container (right side) */
+.extraContainer {
+  flex: 0.2;
+  background: #fafafa;
+  border-left: 1px solid #eee;
+  border-radius: 12px;
+  padding: 20px 10px;
+  height: max-content;
+  transition: all 0.3s ease;
+}
+
+/* Profile Info Hover */
+.profileInfo:hover {
+  transform: scale3d(1.05, 1.05, 1);
+  color: blue;
+}
+
+/* ✅ RESPONSIVE DESIGN */
+
+/* Hide right sidebar on medium screens */
+@media (max-width: 992px) {
+  .extraContainer {
+    display: none;
+  }
+  .feedContainer {
+    flex: 0.8;
+  }
+}
+
+/* Stack sidebar + feed vertically on small screens */
+@media (max-width: 768px) {
+  .homeContainer {
+    flex-direction: column;
+  }
+  .leftBar{
+    flex: 0;
+    flex-direction: row;
+  }
+  .ledtBar:hover{
+    transform: scale3d(1.05, 1.05, 1);
+  }
+  .sideBarOption {
+    flex: 1;
+    justify-content: center;
+    font-size: 14px;
+    padding: 10px;
+  }
+  .feedContainer {
+    flex: 1;
+    width: 100%;
+  }
+}
+
+
