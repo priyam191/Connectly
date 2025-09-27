@@ -1,7 +1,7 @@
 import axios from "axios";
 
 export const clientServer = axios.create({
-    baseURL: "http://localhost:5000"
+    baseURL: "https://connectly-prkz.onrender.com"
 });
 
-export const baseURL = "http://localhost:5000";
+export const baseURL = "https://connectly-prkz.onrender.com";
