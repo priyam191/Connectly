@@ -1,0 +1,721 @@
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  background: #f3f2ef;
+  min-height: 100vh;
+}
+
+/* Banner */
+.banner {
+  width: 100%;
+  height: 200px;
+  position: relative;
+  background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+.bannerImage {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, #0a66c2 0%, #004182 100%);
+  border-radius: 8px 8px 0 0;
+}
+
+/* Profile Header */
+.profileHeader {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  margin-top: -60px;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.profileImageContainer {
+  position: relative;
+}
+
+.profileImage {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 4px solid #fff;
+  object-fit: cover;
+  position: absolute;
+  top: -60px;
+  left: 0;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.profileInfo {
+  flex: 1;
+  margin-left: 140px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.nameSection {
+  flex: 1;
+}
+
+.name {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #222;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.headline {
+  font-size: 1.1rem;
+  color: #666;
+  margin: 0.5rem 0;
+  font-weight: 400;
+}
+
+.location {
+  font-size: 1rem;
+  color: #666;
+  margin: 0.3rem 0;
+}
+
+.actionButtons {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.connectBtn {
+  padding: 0.6rem 1.5rem;
+  background: #0a66c2;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.connectBtn:hover {
+  background: #004182;
+}
+
+.connectedBtn {
+  padding: 0.6rem 1.5rem;
+  background: #28a745;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: default;
+  font-size: 0.9rem;
+}
+
+.messageBtn {
+  padding: 0.6rem 1.5rem;
+  background: #fff;
+  color: #0a66c2;
+  border: 1px solid #0a66c2;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 0.9rem;
+}
+
+.messageBtn:hover {
+  background: #f3f2ef;
+}
+
+.editBtn {
+  padding: 0.6rem 1.5rem;
+  background: #0a66c2;
+  color: #fff;
+  border-radius: 20px;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: background 0.2s;
+  font-size: 0.9rem;
+}
+
+.editBtn:hover {
+  background: #004182;
+}
+
+.moreBtn {
+  padding: 0.6rem;
+  background: #fff;
+  color: #666;
+  border: 1px solid #666;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.moreBtn:hover {
+  background: #f3f2ef;
+}
+
+/* Profile Content */
+.profileContent {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 2rem;
+  margin-top: 2rem;
+  padding: 0 1rem;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Sections */
+.section {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.sectionTitle {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 0.5rem;
+}
+
+.sectionTitleWithIcon {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.sectionTitleWithIcon .sectionTitle {
+  margin-bottom: 0;
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.sectionContent {
+  font-size: 0.95rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Experience Items */
+.experienceItem {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.experienceItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.jobTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.3rem 0;
+}
+
+.company {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 0.3rem 0;
+  font-weight: 500;
+}
+
+.duration {
+  font-size: 0.9rem;
+  color: #888;
+  margin: 0;
+}
+
+/* Education Items */
+.educationItem {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.educationItem:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.degree {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 0.3rem 0;
+}
+
+.institution {
+  font-size: 1rem;
+  color: #666;
+  margin: 0 0 0.3rem 0;
+  font-weight: 500;
+}
+
+/* Contact Info */
+.contactItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.contactItem:last-child {
+  border-bottom: none;
+}
+
+.contactLabel {
+  font-weight: 600;
+  color: #333;
+  font-size: 0.9rem;
+}
+
+.contactValue {
+  color: #666;
+  font-size: 0.9rem;
+}
+
+/* Posts Section - LinkedIn Style */
+.postsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.postItem {
+  background: #fff;
+  border-radius: 8px;
+  padding: 1.5rem;
+  border: 1px solid #e0e0e0;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  transition: box-shadow 0.2s ease;
+}
+
+.postItem:hover {
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+}
+
+.postHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.postAuthorImage {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid #f3f2ef;
+}
+
+.postAuthorInfo {
+  flex: 1;
+}
+
+.postAuthorName {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #000;
+  margin: 0 0 0.2rem 0;
+  line-height: 1.2;
+}
+
+.postDate {
+  font-size: 0.85rem;
+  color: #666;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.postDate::before {
+  content: "•";
+  color: #666;
+}
+
+.postContent {
+  margin-bottom: 1rem;
+}
+
+.postText {
+  font-size: 1rem;
+  color: #000;
+  line-height: 1.5;
+  margin: 0 0 1rem 0;
+  word-wrap: break-word;
+}
+
+.postMedia {
+  margin-top: 1rem;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.postImage {
+  width: 100%;
+  max-height: 400px;
+  object-fit: cover;
+  border-radius: 8px;
+}
+
+.postVideo {
+  width: 100%;
+  max-height: 400px;
+  border-radius: 8px;
+}
+
+.postFile {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.8rem 1.2rem;
+  background: #f3f2ef;
+  color: #0a66c2;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background 0.2s;
+  border: 1px solid #e0e0e0;
+}
+
+.postFile:hover {
+  background: #e6f3ff;
+  text-decoration: none;
+}
+
+.postStats {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid #f0f0f0;
+  margin-top: 1rem;
+}
+
+.likeCount {
+  font-size: 0.9rem;
+  color: #666;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.likeCount::before {
+  content: "👍";
+  font-size: 1rem;
+}
+
+.icon {
+  height: 24px;
+  width: 24px;
+  color: #555;
+}
+
+.noPosts {
+  text-align: center;
+  color: #666;
+  padding: 3rem 2rem;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border: 1px dashed #e0e0e0;
+}
+
+.noPosts::before {
+  content: "📝";
+  font-size: 2rem;
+  display: block;
+  margin-bottom: 1rem;
+}
+
+/* Message Styles */
+.message {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 500;
+}
+
+.editMessage {
+  background: #d4edda;
+  color: #155724;
+  padding: 1rem;
+  border-radius: 6px;
+  margin: 1rem 0;
+  text-align: center;
+  font-weight: 500;
+  border: 1px solid #c3e6cb;
+}
+
+/* Inline Editing Styles */
+.profilePicEdit {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.profilePicEdit:hover {
+  background: rgba(0, 0, 0, 0.8);
+}
+
+.profilePicEdit .editBtn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1rem;
+  cursor: pointer;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.sectionEditBtn {
+  background: #0073b1;
+  color: white;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.sectionEditBtn:hover {
+  background: #005885;
+}
+
+.editForm {
+  background: #f8f9fa;
+  padding: 1.5rem;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  margin-bottom: 1rem;
+}
+
+.editInput,
+.editTextarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  transition: border-color 0.3s;
+  box-sizing: border-box;
+}
+
+.editInput:focus,
+.editTextarea:focus {
+  outline: none;
+  border-color: #0073b1;
+  box-shadow: 0 0 0 2px rgba(0, 115, 177, 0.2);
+}
+
+.editTextarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+.editActions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.saveBtn,
+.cancelBtn {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.saveBtn {
+  background: #28a745;
+  color: white;
+}
+
+.saveBtn:hover:not(:disabled) {
+  background: #218838;
+}
+
+.saveBtn:disabled {
+  background: #6c757d;
+  cursor: not-allowed;
+}
+
+.cancelBtn {
+  background: #6c757d;
+  color: white;
+}
+
+.cancelBtn:hover {
+  background: #5a6268;
+}
+
+.fileInput {
+  display: none;
+}
+
+.fileLabel {
+  display: inline-block;
+  background: #0073b1;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  font-weight: 500;
+  transition: background-color 0.3s;
+  margin-bottom: 1rem;
+}
+
+.fileLabel:hover {
+  background: #005885;
+}
+
+
+
+/* Floating Edit Button */
+.floatingEditButton {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+}
+
+.floatingEditBtn {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: #0a66c2;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  box-shadow: 0 4px 12px rgba(10, 102, 194, 0.3);
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.floatingEditBtn:hover {
+  background: #004182;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(10, 102, 194, 0.4);
+}
+
+.floatingEditBtn:active {
+  transform: translateY(0);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .profileContent {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  
+  .profileHeader {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  
+  .profileInfo {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .profileImage {
+    position: static;
+    margin-bottom: 1rem;
+  }
+  
+  .actionButtons {
+    justify-content: center;
+  }
+
+  .floatingEditButton {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .floatingEditBtn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.2rem;
+  }
+}

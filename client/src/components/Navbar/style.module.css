@@ -1,0 +1,192 @@
+/* Navbar Base */
+.navbar {
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+.navbarContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Logo */
+.logo a {
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
+
+/* User Authentication Section */
+.userSection {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+  margin-right: 2rem;
+}
+
+.userInfo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.greeting {
+  font-weight: 600;
+  color: #0070f3;
+  font-size: 1rem;
+  padding: 0.5rem 1rem;
+  background: rgba(0, 112, 243, 0.1);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 112, 243, 0.2);
+}
+
+.logoutButton {
+  background: #dc3545;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-size: 0.9rem;
+}
+
+.logoutButton:hover {
+  background: #c82333;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.loginSection {
+  display: flex;
+  align-items: center;
+}
+
+.loginLink {
+  text-decoration: none;
+  color: #0070f3;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border: 2px solid #0070f3;
+  border-radius: 25px;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.loginLink:hover {
+  background: #0070f3;
+  color: white;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 112, 243, 0.3);
+}
+
+/* Menu */
+.menu {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+}
+
+.menu li a {
+  text-decoration: none;
+  color: #333;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.menu li a:hover {
+  color: #0070f3; /* Next.js blue */
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  gap: 5px;
+}
+
+.hamburger span {
+  width: 25px;
+  height: 3px;
+  background: #333;
+  transition: all 0.3s ease;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .navbarContainer {
+    padding: 1rem;
+  }
+
+  .userSection {
+    margin-right: 1rem;
+  }
+
+  .greeting {
+    font-size: 0.9rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  .loginLink {
+    padding: 0.4rem 1.2rem;
+    font-size: 0.9rem;
+  }
+
+  .logoutButton {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.8rem;
+  }
+
+  .userInfo {
+    gap: 0.5rem;
+  }
+
+  .menu {
+    position: absolute;
+    top: 70px;
+    left: 0;
+    width: 100%;
+    flex-direction: column;
+    background: #fff;
+    padding: 1rem 0;
+    gap: 1.5rem;
+    text-align: center;
+    transform: translateY(-300px);
+    opacity: 0;
+    transition: all 0.3s ease-in-out;
+  }
+
+  .menu.active {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  /* Animate hamburger into X */
+  .hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(5px, -5px);
+  }
+}
