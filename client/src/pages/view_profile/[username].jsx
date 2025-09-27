@@ -247,9 +247,13 @@ export default ViewProfilePage;
 
 export async function getServerSideProps(context) {
   try {
-    // Use the full URL for server-side requests
+    // Use the deployed server URL for server-side requests
+    const serverURL = process.env.NODE_ENV === 'production' 
+      ? 'https://connectly-prkz.onrender.com' 
+      : 'http://localhost:5000';
+    
     const response = await fetch(
-      `http://localhost:5000/user/get_profile_based_on_username?username=${context.query.username}`
+      `${serverURL}/user/get_profile_based_on_username?username=${context.query.username}`
     );
     
     if (!response.ok) {
