@@ -2,36 +2,26 @@ import styles from "@/styles/Home.module.css";
 import { useRouter } from "next/router";
 import UserLayout from "@/layout/userLayout";
 
-// const geistSans = Geist({
-//   variable: "--font-geist-sans",
-//   subsets: ["latin"],
-// });
-
-// const geistMono = Geist_Mono({
-//   variable: "--font-geist-mono",
-//   subsets: ["latin"],
-// });
-
 export default function Home() {
-
   const router = useRouter();
   return (
     <UserLayout>
       <div className={styles.container}>
         <div className={styles.mainContainer}>
+          <div>
+            <h1 className={styles.heading}>Connect with Professionals</h1>
+            <p className={styles.subtext}>
+              Grow your network and unlock opportunities.
+            </p>
 
-          
-            <p>connect with professionals</p>
-
-            <button onClick={() => 
-              router.push('/login')
-            } className={styles.buttonJoin}>
-              <p>join now</p>
+            <button
+              onClick={() => router.push("/login")}
+              className={styles.buttonJoin}
+            >
+              Join Now
             </button>
-            
+          </div>
         </div>
-
-
       </div>
     </UserLayout>
   );

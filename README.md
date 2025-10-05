@@ -56,47 +56,6 @@ npm run dev
 
 The frontend will start on `http://localhost:3000`
 
-## Login System Features
-
-### Recent Improvements Made:
-
-1. **Fixed Backend Login Response**: 
-   - Removed duplicate return statement in login controller
-   - Now properly returns token and user data
-
-2. **Enhanced Frontend Validation**:
-   - Added client-side validation for email format
-   - Added password length validation (minimum 6 characters)
-   - Added proper error handling and display
-
-3. **Improved User Experience**:
-   - Added loading states during API calls
-   - Added error message display
-   - Added success message display
-   - Auto-switch to login after successful registration
-   - Disabled form inputs during loading
-
-4. **Fixed Registration Flow**:
-   - Added missing `name` field for registration
-   - Updated Redux actions to handle registration properly
-   - Registration now requires login after successful signup
-
-## Testing the Login System
-
-1. **Registration Test**:
-   - Go to `http://localhost:3000/login`
-   - Click "Sign Up" to switch to registration mode
-   - Fill in all fields: Full Name, Username, Email, Password
-   - Submit the form
-   - You should see a success message and be redirected to login
-
-2. **Login Test**:
-   - Use the credentials you just registered
-   - Enter email and password
-   - Submit the form
-   - You should be redirected to the dashboard
-
-## Troubleshooting
 
 ### Common Issues:
 
