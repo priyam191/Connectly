@@ -4,6 +4,7 @@ import { useRouter } from "next/router";
 import { setTokenIsThere } from "@/config/redux/reducer/authReducer";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllUsers, sendConnectionRequest, getConnections } from "@/config/redux/action/authAction";
+import { baseURL } from "@/config";
 
 function DashboardLayout({ children }) {
   const router = useRouter();
@@ -43,6 +44,48 @@ function DashboardLayout({ children }) {
 
         {/* Sidebar */}
         <aside className={styles.leftBar}>
+          {/* Current User Profile Section */}
+          {authState.user && (
+            <div 
+              onClick={() => authState.user?.userId?.username && router.push(`/view_profile/${authState.user.userId.username}`)}
+              style={{
+                padding: '15px',
+                borderBottom: '1px solid #e1e1e1',
+                marginBottom: '10px',
+                cursor: 'pointer',
+                display: 'flex',
+                alignItems: 'center',
+                gap: '12px',
+                backgroundColor: '#f8f9fa',
+                borderRadius: '8px',
+                margin: '10px'
+              }}
+            >
+              <img
+                src={authState.user.userId?.profilePic ? `${baseURL}/${authState.user.userId.profilePic}` : `https://via.placeholder.com/45x45/007bff/white?text=${(authState.user.userId?.name || 'M').charAt(0).toUpperCase()}`}
+                alt="My Profile"
+                style={{
+                  width: '45px',
+                  height: '45px',
+                  borderRadius: '50%',
+                  objectFit: 'cover',
+                  border: '3px solid #007bff'
+                }}
+                onError={(e) => {
+                  e.target.src = `https://via.placeholder.com/45x45/007bff/white?text=${(authState.user.userId?.name || 'M').charAt(0).toUpperCase()}`;
+                }}
+              />
+              <div>
+                <h4 style={{margin: '0', fontSize: '14px', fontWeight: '600'}}>
+                  {authState.user.userId?.name || 'My Profile'}
+                </h4>
+                <p style={{margin: '0', fontSize: '12px', color: '#666'}}>
+                  @{authState.user.userId?.username || 'username'}
+                </p>
+              </div>
+            </div>
+          )}
+          
           <div onClick={() => router.push('/dashboard')} className={styles.sideBarOption}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -115,15 +158,31 @@ function DashboardLayout({ children }) {
                 <div
                   key={profile._id || userId}
                   className={styles.profileCard}
-                  style={{display: 'flex' , justifyContent: 'space-between'}}
+                  style={{display: 'flex' , justifyContent: 'space-between', alignItems: 'center'}}
                 >
                   <div 
                     onClick={() => userId && router.push(`/view_profile/${user.username}`)} 
                     className={styles.profileInfo} 
-                    style={{cursor: 'pointer', padding: '10px'}}
+                    style={{cursor: 'pointer', padding: '10px', display: 'flex', alignItems: 'center', gap: '10px'}}
                   >
-                    <h4>{user?.name}</h4>
-                    {user?.username && <p>@{user.username}</p>}
+                    <img
+                      src={user?.profilePic ? `${baseURL}/${user.profilePic}` : `https://via.placeholder.com/40x40/007bff/white?text=${(user?.name || 'U').charAt(0).toUpperCase()}`}
+                      alt={user?.name || 'Profile'}
+                      style={{
+                        width: '40px',
+                        height: '40px',
+                        borderRadius: '50%',
+                        objectFit: 'cover',
+                        border: '2px solid #e1e1e1'
+                      }}
+                      onError={(e) => {
+                        e.target.src = `https://via.placeholder.com/40x40/007bff/white?text=${(user?.name || 'U').charAt(0).toUpperCase()}`;
+                      }}
+                    />
+                    <div>
+                      <h4 style={{margin: '0', fontSize: '14px'}}>{user?.name}</h4>
+                      {user?.username && <p style={{margin: '0', fontSize: '12px', color: '#666'}}>@{user.username}</p>}
+                    </div>
                   </div>
                   <div
                     onClick={() => handleConnect(userId)}                  

@@ -42,7 +42,7 @@ function EditProfilePage() {
         username: user.userId?.username || '',
         email: user.userId?.email || ''
       });
-      setProfilePicPreview(user.userId?.profilePic ? `${baseURL}/${user.userId.profilePic}` : `${baseURL}/uploads/default.jpg`);
+      setProfilePicPreview(user.userId?.profilePic ? `${baseURL}/${user.userId.profilePic}` : `https://via.placeholder.com/150x150/007bff/white?text=${(user.userId?.name || 'U').charAt(0).toUpperCase()}`);
     }
   }, [user]);
 

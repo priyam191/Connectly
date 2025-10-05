@@ -3,6 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "@/config/redux/reducer/authReducer";
+import { baseURL } from "@/config";
 import styles from "./style.module.css"; // Import CSS module
 
 export default function NavbarComponent() {
@@ -31,15 +32,31 @@ export default function NavbarComponent() {
         <div className={styles.userSection}>
           {loggedIn && user ? (
             <div className={styles.userInfo}>
-              <span className={styles.greeting}>
-                Hey{" "}
-                {user.userId?.name ||
-                  user.userId?.username ||
-                  user.name ||
-                  user.username ||
-                  "User"}
-                !
-              </span>
+              <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
+                <img
+                  src={(user.userId?.profilePic || user.profilePic) ? `${baseURL}/${user.userId?.profilePic || user.profilePic}` : `https://via.placeholder.com/32x32/007bff/white?text=${(user.userId?.name || user.name || 'U').charAt(0).toUpperCase()}`}
+                  alt="Profile"
+                  style={{
+                    width: '32px',
+                    height: '32px',
+                    borderRadius: '50%',
+                    objectFit: 'cover',
+                    border: '2px solid #e1e1e1'
+                  }}
+                  onError={(e) => {
+                    e.target.src = `https://via.placeholder.com/32x32/007bff/white?text=${(user.userId?.name || user.name || 'U').charAt(0).toUpperCase()}`;
+                  }}
+                />
+                <span className={styles.greeting}>
+                  Hey{" "}
+                  {user.userId?.name ||
+                    user.userId?.username ||
+                    user.name ||
+                    user.username ||
+                    "User"}
+                  !
+                </span>
+              </div>
               <Link href="/login">
                 <button
                   onClick={handleLogout}

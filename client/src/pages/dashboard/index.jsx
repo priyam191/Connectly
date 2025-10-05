@@ -174,9 +174,12 @@ function Dashboard() {
             <img
               width={50}
               height={50}
-              src={profilePic ? `${baseURL}/${profilePic}` : `${baseURL}/default.jpg`}
+              src={profilePic ? `${baseURL}/${profilePic}` : `https://via.placeholder.com/50x50/007bff/white?text=${(user?.userId?.name || user?.name || 'M').charAt(0).toUpperCase()}`}
               alt="User Avatar"
               className={styles.avatar}
+              onError={(e) => {
+                e.target.src = `https://via.placeholder.com/50x50/007bff/white?text=${(user?.userId?.name || user?.name || 'M').charAt(0).toUpperCase()}`;
+              }}
             />
 
             <div
@@ -298,8 +301,11 @@ function Dashboard() {
                 <div className={styles.singleCard_profileContainer}>
                   <img
                     className={styles.userProfile}
-                    src={`${baseURL}/${post.userId?.profilePic || "default.jpg"}`}
+                    src={post.userId?.profilePic ? `${baseURL}/${post.userId.profilePic}` : `https://via.placeholder.com/40x40/007bff/white?text=${(post.userId?.name || 'U').charAt(0).toUpperCase()}`}
                     alt="user"
+                    onError={(e) => {
+                      e.target.src = `https://via.placeholder.com/40x40/007bff/white?text=${(post.userId?.name || 'U').charAt(0).toUpperCase()}`;
+                    }}
                   />
                   <div>
                     <h4>{post.userId?.name || "Anonymous"}</h4>

@@ -65,8 +65,11 @@ function ViewProfilePage({ userProfile }) {
                 className={styles.profileImage}
                 src={userProfile.userId?.profilePic 
                   ? `${baseURL}/${userProfile.userId.profilePic}`
-                  : `${baseURL}/uploads/default.jpg`}
+                  : `https://via.placeholder.com/120x120/007bff/white?text=${(userProfile.userId?.name || 'U').charAt(0).toUpperCase()}`}
                 alt="Profile"
+                onError={(e) => {
+                  e.target.src = `https://via.placeholder.com/120x120/007bff/white?text=${(userProfile.userId?.name || 'U').charAt(0).toUpperCase()}`;
+                }}
               />
             </div>
             
@@ -209,8 +212,11 @@ function ViewProfilePage({ userProfile }) {
                             className={styles.postAuthorImage}
                             src={post.userId?.profilePic 
                               ? `${baseURL}/${post.userId.profilePic}`
-                              : `${baseURL}/uploads/default.jpg`}
+                              : `https://via.placeholder.com/40x40/007bff/white?text=${(post.userId?.name || 'U').charAt(0).toUpperCase()}`}
                             alt="Author"
+                            onError={(e) => {
+                              e.target.src = `https://via.placeholder.com/40x40/007bff/white?text=${(post.userId?.name || 'U').charAt(0).toUpperCase()}`;
+                            }}
                           />
                           <div className={styles.postAuthorInfo}>
                             <h4 className={styles.postAuthorName}>{post.userId?.name}</h4>
