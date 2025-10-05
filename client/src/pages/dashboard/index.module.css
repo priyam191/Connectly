@@ -293,6 +293,24 @@
 .posticon svg {
   width: 22px;
   height: 22px;
+  transition: all 0.2s ease;
+}
+
+.posticon:hover svg {
+  transform: scale(1.1);
+}
+
+.posticon.liked {
+  color: #e74c3c;
+}
+
+.posticon.liked svg {
+  fill: #e74c3c;
+  color: #e74c3c;
+}
+
+.posticon.liked:hover {
+  color: #c0392b;
 }
 
 .icon {

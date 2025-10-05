@@ -1,7 +1,7 @@
 // const { createSlice } = require("@reduxjs/toolkit")
 // const { reset } = require("../authReducer")
 import { createSlice } from "@reduxjs/toolkit";
-import { getAllPosts, getUserPosts, createPost, getAllComments, addComment } from "../../action/postAction";
+import { getAllPosts, getUserPosts, createPost, getAllComments, addComment, incrementPostLike } from "../../action/postAction";
 
 
 const initialState = {
@@ -85,6 +85,15 @@ const postSlice = createSlice({
         if (state.postId === action.payload.post_id) {
           // Refresh comments after adding a new one
           // The comment will be fetched when the user opens the comments section again
+        }
+      })
+      // Handle like/unlike updates
+      .addCase(incrementPostLike.fulfilled, (state, action) => {
+        const { post_id, likeCount, liked } = action.payload;
+        const postIndex = state.posts.findIndex(post => post._id === post_id);
+        if (postIndex !== -1) {
+          state.posts[postIndex].likes = likeCount;
+          state.posts[postIndex].userHasLiked = liked;
         }
       })
   },

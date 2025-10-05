@@ -4,6 +4,7 @@ import Profile from '../models/profile.js';
 import Post from '../models/post.js';
 import User from '../models/users.js';
 import Comment from '../models/comments.js';
+import Like from '../models/likes.js';
 
 
 
@@ -46,8 +47,32 @@ export const createPost = async (req, res) => {
 
 export const getAllPosts = async (req, res) => {
     try {
-        const posts = await Post.find().sort({ createdAt: -1 }).populate('userId', 'name username profilePicture');
-        return res.status(200).json({posts});
+        const { token } = req.query;
+        let currentUserId = null;
+        
+        // Get current user if token is provided
+        if (token) {
+            const currentUser = await User.findOne({ token });
+            if (currentUser) {
+                currentUserId = currentUser._id;
+            }
+        }
+        
+        const posts = await Post.find().sort({ createdAt: -1 }).populate('userId', 'name username profilePic');
+        
+        // Add like information to each post
+        const postsWithLikes = await Promise.all(posts.map(async (post) => {
+            const likeCount = await Like.countDocuments({ postId: post._id });
+            const userHasLiked = currentUserId ? await Like.exists({ userId: currentUserId, postId: post._id }) : false;
+            
+            return {
+                ...post.toObject(),
+                likes: likeCount, // This will override the old likes field
+                userHasLiked: !!userHasLiked
+            };
+        }));
+        
+        return res.status(200).json({posts: postsWithLikes});
     } catch (error) {
         console.error('Error fetching posts:', error);
         return res.status(500).json({ message: 'Server error' });
@@ -163,22 +188,56 @@ export const deleteComment = async (req, res) => {
 }
 
 export const likePost = async (req, res) => {
-    const {  post_id } = req.body;      
+    const { post_id, token } = req.body;
 
     try {
+        // Find user by token
+        const user = await User.findOne({ token });
+        if (!user) {
+            return res.status(401).json({ message: 'User not authenticated' });
+        }
+
+        // Check if post exists
         const post = await Post.findById(post_id);
         if (!post) {
             return res.status(404).json({ message: 'Post not found' });
         }
 
-        post.likes = post.likes + 1;
-        await post.save();
-        return res.status(200).json({ 
-            message: 'Post liked successfully', 
-            post
-        });
+        // Check if user has already liked this post
+        const existingLike = await Like.findOne({ userId: user._id, postId: post_id });
+        
+        if (existingLike) {
+            // If already liked, remove the like (unlike)
+            await Like.deleteOne({ userId: user._id, postId: post_id });
+            
+            // Get updated like count
+            const likeCount = await Like.countDocuments({ postId: post_id });
+            
+            return res.status(200).json({ 
+                message: 'Post unliked successfully',
+                liked: false,
+                likeCount: likeCount
+            });
+        } else {
+            // If not liked, add the like
+            const newLike = new Like({
+                userId: user._id,
+                postId: post_id
+            });
+            await newLike.save();
+            
+            // Get updated like count
+            const likeCount = await Like.countDocuments({ postId: post_id });
+            
+            return res.status(200).json({ 
+                message: 'Post liked successfully',
+                liked: true,
+                likeCount: likeCount
+            });
+        }
     } catch (error) {
-        console.error('Error liking post:', error);
+        console.error('Error processing like:', error);
+        return res.status(500).json({ message: 'Internal server error' });
     }
 }
 

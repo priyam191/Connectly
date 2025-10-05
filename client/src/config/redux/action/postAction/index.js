@@ -6,7 +6,10 @@ export const getAllPosts = createAsyncThunk(
   "post/getAllPosts",
   async (_, thunkAPI) => {
     try {
-      const response = await clientServer.get("/posts");
+      const token = localStorage.getItem('token');
+      const response = await clientServer.get("/posts", {
+        params: { token }
+      });
       return thunkAPI.fulfillWithValue(response.data);
     } catch (err) {
       return thunkAPI.rejectWithValue(err.response?.data || { message: "Error fetching posts" });
@@ -79,17 +82,20 @@ export const incrementPostLike = createAsyncThunk(
   "post/incrementLike", 
   async (post, thunkAPI) => {
     try {
+      const token = localStorage.getItem('token');
       const response = await clientServer.post("/like", {
-        
-        post_id: post.post_id
-      })
+        post_id: post.post_id,
+        token: token
+      });
 
-      return thunkAPI.fulfillWithValue(response.data);
+      return thunkAPI.fulfillWithValue({
+        ...response.data,
+        post_id: post.post_id
+      });
     }catch(error){
       return thunkAPI.rejectWithValue(error.response?.data || { message: "Error liking post" });
     }
   }
-  
 )
 
 export const addComment = createAsyncThunk(
