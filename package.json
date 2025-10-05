@@ -1,4 +1,21 @@
 {
+  "name": "connectly",
+  "version": "1.0.0",
+  "description": "Full-stack social media application",
+  "scripts": {
+    "dev": "docker-compose -f docker-compose.dev.yml up --build",
+    "dev:down": "docker-compose -f docker-compose.dev.yml down",
+    "start": "docker-compose up -d",
+    "stop": "docker-compose down",
+    "build": "docker-compose build",
+    "logs": "docker-compose logs -f",
+    "clean": "docker-compose down -v --remove-orphans && docker system prune -f",
+    "server:dev": "cd server && npm run dev",
+    "client:dev": "cd client && npm run dev",
+    "server:install": "cd server && npm install",
+    "client:install": "cd client && npm install",
+    "install:all": "npm run server:install && npm run client:install"
+  },
   "dependencies": {
     "axios": "^1.11.0"
   }

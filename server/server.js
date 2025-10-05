@@ -22,6 +22,16 @@ app.use(postRoutes); // Use the post routes
 app.use(userRoutes); // Use the user routes
 app.use(express.static('uploads')); // Serve static files from the uploads directory
 
+// Health check endpoint
+app.get('/health', (req, res) => {
+  res.status(200).json({ 
+    status: 'OK', 
+    timestamp: new Date().toISOString(),
+    uptime: process.uptime(),
+    environment: process.env.NODE_ENV || 'development'
+  });
+});
+
 // Error handling middleware for multer errors
 app.use((error, req, res, next) => {
   if (error instanceof multer.MulterError) {

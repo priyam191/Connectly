@@ -1,0 +1,73 @@
+version: '3.8'
+
+services:
+  # MongoDB Database (same as production)
+  mongodb:
+    image: mongo:7.0
+    container_name: connectly-mongodb-dev
+    restart: unless-stopped
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: ${MONGO_ROOT_USERNAME:-admin}
+      MONGO_INITDB_ROOT_PASSWORD: ${MONGO_ROOT_PASSWORD:-password123}
+      MONGO_INITDB_DATABASE: ${MONGO_DB_NAME:-connectly}
+    ports:
+      - "${MONGO_PORT:-27017}:27017"
+    volumes:
+      - mongodb_dev_data:/data/db
+    networks:
+      - connectly-dev-network
+
+  # Server (Development with hot reload)
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    container_name: connectly-server-dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      PORT: ${SERVER_PORT:-5000}
+      MONGO_URI: mongodb://${MONGO_ROOT_USERNAME:-admin}:${MONGO_ROOT_PASSWORD:-password123}@mongodb:27017/${MONGO_DB_NAME:-connectly}?authSource=admin
+    ports:
+      - "${SERVER_PORT:-5000}:5000"
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+      - server_dev_uploads:/app/uploads
+    networks:
+      - connectly-dev-network
+    depends_on:
+      - mongodb
+
+  # Client (Development with hot reload)
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    container_name: connectly-client-dev
+    restart: unless-stopped
+    environment:
+      NODE_ENV: development
+      NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL:-http://localhost:5000}
+    ports:
+      - "${CLIENT_PORT:-3000}:3000"
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+      - /app/.next
+    networks:
+      - connectly-dev-network
+    depends_on:
+      - server
+
+# Networks
+networks:
+  connectly-dev-network:
+    driver: bridge
+
+# Volumes
+volumes:
+  mongodb_dev_data:
+    driver: local
+  server_dev_uploads:
+    driver: local
