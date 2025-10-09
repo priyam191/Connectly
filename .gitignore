@@ -1,3 +1,6 @@
 .env
 node_modules/
-learn.txt 
+.env.example
+DOCKER_GUIDE.md
+GITHUB_SETUP.md
+
