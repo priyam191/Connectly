@@ -14,7 +14,7 @@ const convertUserDataTOPDF = async (userData) => {
     const stream = fs.createWriteStream("uploads/" + outputPath);
     doc.pipe(stream);
 
-    // ✅ Fix here: use backticks and proper path
+    //  Fix here: use backticks and proper path
     const imagePath = path.join("uploads", userData.userId.profilePic);
     if (fs.existsSync(imagePath)) {
         doc.image(imagePath, { align: "center", width: 200 });
