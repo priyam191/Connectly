@@ -169,9 +169,9 @@ function ViewProfilePage({ userProfile }) {
                     <div key={index} className={styles.educationItem}>
                       <h4 className={styles.degree}>{edu.degree} in {edu.fieldOfStudy}</h4>
                       <p className={styles.institution}>{edu.institution}</p>
-                      <p className={styles.duration}>
+                      {/* <p className={styles.duration}>
                         {new Date(edu.startDate).toLocaleDateString()} - {edu.endDate ? new Date(edu.endDate).toLocaleDateString() : 'Present'}
-                      </p>
+                      </p> */}
                     </div>
                   ))}
                 </div>

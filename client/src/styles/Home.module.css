@@ -1,43 +1,70 @@
+/* Container wraps everything */
 .container {
-  font-family: 'Gill Sans', 'Gill Sans MT', 'Calibri', 'Trebuchet MS', 'sans-serif';
-  padding: 1.2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
+  padding: 20px;
 }
 
+/* Inner content wrapper */
 .mainContainer {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 90vh;
-  padding-inline: 2rem;
-  gap: 2rem;
-  text-align: center;
+  text-align: left;
+  max-width: 900px;
+  padding: 40px;
 }
 
+/* Headline */
 .heading {
-  font-size: 2rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
+  font-size: 48px;
+  font-weight: 700;
+  color: #1e1e1e;
+  margin-bottom: 10px;
+  line-height: 1.2;
 }
 
+/* Subtext */
 .subtext {
-  font-size: 1rem;
+  font-size: 18px;
   color: #555;
-  margin-bottom: 1.5rem;
+  margin-bottom: 25px;
 }
 
+/* CTA Button */
 .buttonJoin {
-  background-color: #2563eb;
+  padding: 14px 30px;
+  font-size: 16px;
+  font-weight: 600;
+  background: #007bff;
   color: white;
-  padding: 0.7rem 1.8rem;
   border: none;
   border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: 0.2s ease;
 }
 
 .buttonJoin:hover {
-  background-color: #1d4ed8;
-  transform: scale(1.03);
+  background: #0056c2;
+}
+
+/* ✅ Responsive Styles */
+@media (max-width: 768px) {
+  .heading {
+    font-size: 32px;
+    text-align: center;
+  }
+
+  .subtext {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .mainContainer {
+    text-align: center;
+    padding: 20px;
+  }
 }
