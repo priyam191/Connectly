@@ -167,56 +167,56 @@ jobs:
           echo "Would run: docker-compose -f docker-compose.yml -f docker-compose.staging.yml up -d"
           # Add your staging deployment commands here
 
-  deploy-production:
-    needs: [test, build-and-push]
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-    environment:
-      name: production
+  # deploy-production:
+  #   needs: [test, build-and-push]
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+  #   environment:
+  #     name: production
     
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+  #   steps:
+  #     - name: Checkout code
+  #       uses: actions/checkout@v4
 
-      - name: Deploy to AWS EC2
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.AWS_EC2_HOST }}
-          username: ${{ secrets.AWS_EC2_USER }}
-          key: ${{ secrets.AWS_EC2_KEY }}
-          script: |
-            # Navigate to application directory
-            cd /var/www/connectly
+  #     - name: Deploy to AWS EC2
+  #       uses: appleboy/ssh-action@v1.0.0
+  #       with:
+  #         host: ${{ secrets.AWS_EC2_HOST }}
+  #         username: ${{ secrets.AWS_EC2_USER }}
+  #         key: ${{ secrets.AWS_EC2_KEY }}
+  #         script: |
+  #           # Navigate to application directory
+  #           cd /var/www/connectly
             
-            # Pull latest changes
-            git pull origin main
+  #           # Pull latest changes
+  #           git pull origin main
             
-            # Create production environment file
-            cat > .env.production << EOF
-            MONGO_URI=mongodb://connectly_admin:${{ secrets.MONGO_ROOT_PASSWORD }}@mongodb:27017/connectly?authSource=admin
-            MONGO_ROOT_USERNAME=connectly_admin
-            MONGO_ROOT_PASSWORD=${{ secrets.MONGO_ROOT_PASSWORD }}
-            MONGO_DB_NAME=connectly
-            NODE_ENV=production
-            SERVER_PORT=5000
-            CLIENT_PORT=3000
-            NEXT_PUBLIC_API_URL=http://${{ secrets.AWS_EC2_HOST }}:5000
-            JWT_SECRET=${{ secrets.JWT_SECRET }}
-            JWT_EXPIRES_IN=7d
-            CORS_ORIGIN=http://${{ secrets.AWS_EC2_HOST }}:3000
-            MAX_FILE_SIZE=5242880
-            UPLOAD_PATH=/var/lib/connectly/uploads
-            EOF
+  #           # Create production environment file
+  #           cat > .env.production << EOF
+  #           MONGO_URI=mongodb://connectly_admin:${{ secrets.MONGO_ROOT_PASSWORD }}@mongodb:27017/connectly?authSource=admin
+  #           MONGO_ROOT_USERNAME=connectly_admin
+  #           MONGO_ROOT_PASSWORD=${{ secrets.MONGO_ROOT_PASSWORD }}
+  #           MONGO_DB_NAME=connectly
+  #           NODE_ENV=production
+  #           SERVER_PORT=5000
+  #           CLIENT_PORT=3000
+  #           NEXT_PUBLIC_API_URL=http://${{ secrets.AWS_EC2_HOST }}:5000
+  #           JWT_SECRET=${{ secrets.JWT_SECRET }}
+  #           JWT_EXPIRES_IN=7d
+  #           CORS_ORIGIN=http://${{ secrets.AWS_EC2_HOST }}:3000
+  #           MAX_FILE_SIZE=5242880
+  #           UPLOAD_PATH=/var/lib/connectly/uploads
+  #           EOF
             
-            # Create production directories
-            sudo mkdir -p /var/lib/connectly/{mongodb,uploads,mongodb-config}
-            sudo chown -R ubuntu:ubuntu /var/lib/connectly
+  #           # Create production directories
+  #           sudo mkdir -p /var/lib/connectly/{mongodb,uploads,mongodb-config}
+  #           sudo chown -R ubuntu:ubuntu /var/lib/connectly
             
-            # Stop existing containers
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml down || true
+  #           # Stop existing containers
+  #           docker-compose -f docker-compose.yml -f docker-compose.prod.yml down || true
             
-            # Start production environment
-            docker-compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.production up -d --build
+  #           # Start production environment
+  #           docker-compose -f docker-compose.yml -f docker-compose.prod.yml --env-file .env.production up -d --build
             
-            # Clean up unused images
-            docker image prune -f
+  #           # Clean up unused images
+  #           docker image prune -f
